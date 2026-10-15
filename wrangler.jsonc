@@ -1,0 +1,16 @@
+{
+	"$schema": "node_modules/wrangler/config-schema.json",
+	"main": ".open-next/worker.js",
+	"name": "elen-store-stok",
+	"compatibility_date": "2026-10-05",
+	"compatibility_flags": ["nodejs_compat", "global_fetch_strictly_public"],
+	"assets": {
+		"directory": ".open-next/assets",
+		"binding": "ASSETS"
+	}
+	// Opsional untuk produksi (penyempurnaan pasca-Fase 1):
+	// 1. R2 incremental cache — lihat https://opennext.js.org/cloudflare/caching
+	//    "services": [{ "binding": "WORKER_SELF_REFERENCE", "service": "elen-store-stok" }],
+	//    "r2_buckets": [{ "binding": "NEXT_INC_CACHE_R2_BUCKET", "bucket_name": "elen-store-stok-opennext-cache" }]
+	// 2. Image optimization — "images": { "binding": "IMAGES" }
+}
