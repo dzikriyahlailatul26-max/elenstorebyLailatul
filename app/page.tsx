@@ -29,7 +29,7 @@ export default async function DashboardPage() {
 
   return (
     <div className="space-y-6">
-      {/* BANNER KEAMANAN AKSES (REVISI POIN 1) */}
+      {/* 1. BANNER KEAMANAN AKSES (REVISI POIN 1) */}
       {!user ? (
         <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 rounded-2xl border border-amber-200 bg-amber-50/80 p-4 shadow-sm">
           <div className="flex items-center gap-3">
@@ -38,10 +38,10 @@ export default async function DashboardPage() {
             </span>
             <div>
               <p className="text-sm font-semibold text-amber-900">
-                Mode Viewer (Tampilan Terproteksi)
+                Mode Viewer (Akses Terproteksi)
               </p>
               <p className="text-xs text-amber-700">
-                Akses input & ubah stok gudang dikunci. Silakan login password untuk membuka hak akses.
+                Akses input & potong stok gudang dikunci. Silakan login untuk mengelola stok.
               </p>
             </div>
           </div>
@@ -60,7 +60,7 @@ export default async function DashboardPage() {
             </span>
             <div>
               <p className="text-sm font-semibold text-emerald-900">
-                Akses Terverifikasi — {ROLE_LABELS[user.role]}
+                Akses Terverifikasi — Staf Gudang
               </p>
               <p className="text-xs text-emerald-700">
                 Anda memiliki hak akses penuh untuk mengelola & memotong stok.
@@ -70,18 +70,17 @@ export default async function DashboardPage() {
         </div>
       )}
 
-      {/* HEADER UTAMA */}
+      {/* 2. HEADER UTAMA */}
       <div>
         <h2 className="text-2xl font-bold text-slate-900">
-          Halo, {user?.name.split(' ')[0] ?? 'Pengguna'} 👋
+          Elen Store — Management Stok Lavie Pants
         </h2>
         <p className="text-sm text-slate-500">
-          Dashboard {user ? ROLE_LABELS[user.role] : ''} — monitoring stok real-time
-          semua varian Lavie Pants.
+          Prototype Monitoring Stok Ready & Buffer Pre-Order (PO) Lengkap All Size.
         </p>
       </div>
 
-      {/* KARTU RINGKASAN */}
+      {/* 3. KARTU RINGKASAN */}
       <div className="grid grid-cols-2 gap-4 lg:grid-cols-4">
         {cards.map((card) => (
           <div
@@ -97,39 +96,14 @@ export default async function DashboardPage() {
         ))}
       </div>
 
-      {/* AKSI CEPAT SESUAI ROLE */}
-      {quickActions.length > 0 && (
-        <div>
-          <h3 className="mb-3 text-sm font-semibold uppercase text-slate-400">
-            Aksi Cepat
-          </h3>
-          <div className="flex flex-wrap gap-3">
-            {quickActions.map((item) => (
-              <Link
-                key={item.href}
-                href={item.href}
-                className="rounded-xl border border-slate-200 bg-white px-4 py-3 text-sm font-medium text-slate-700 shadow-sm transition hover:bg-slate-50"
-              >
-                {item.icon} {item.label}
-                {item.phase > 1 && (
-                  <span className="ml-2 rounded-full bg-slate-200 px-2 py-0.5 text-[10px] font-semibold text-slate-500">
-                    Fase {item.phase}
-                  </span>
-                )}
-              </Link>
-            ))}
-          </div>
-        </div>
-      )}
-
-      {/* TABEL STOK (REVISI POIN 2: TAMBAH PADDING BOTTOM AGAR TIDAK TERPOTONG) */}
-      <div className="rounded-2xl border border-slate-200 bg-white p-6 pb-8 shadow-sm">
+      {/* 4. TABEL STOK REAL-TIME (REVISI POIN 2: PADDING DIPERBARUI AGAR TIDAK TERPOTONG) */}
+      <div className="rounded-2xl border border-slate-200 bg-white p-6 pb-12 shadow-sm">
         <div className="mb-4 flex items-center justify-between">
           <h3 className="text-lg font-semibold text-slate-800">
-            📦 Stok Real-time (All Size)
+            📦 Monitoring Stok Real-time (All Size)
           </h3>
           <span className="text-xs text-slate-400">
-            {user ? 'Mode Edit Aktif' : 'Mode baca — perubahan via modul Gudang'}
+            {user ? 'Mode Edit Gudang Aktif' : 'Mode Baca (Viewer)'}
           </span>
         </div>
         <StockTable products={products} />
